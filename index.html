@@ -84,6 +84,7 @@ label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}input,se
 <script>
 const DEFAULT_NAMES=["Spieler 1","Spieler 2","Spieler 3","Spieler 4"];
 const STORE="kicker-crew-v1";
+const DEFAULT_SEL={s2:1,a2:1,b1:2,b2:3};
 let state={names:[...DEFAULT_NAMES],games:[]}, mode="single";
 const $=id=>document.getElementById(id);
 function load(){try{const raw=localStorage.getItem(STORE);if(raw){const x=JSON.parse(raw);if(Array.isArray(x.names)&&x.names.length===4&&Array.isArray(x.games))state=x;}}catch(e){}}
@@ -92,7 +93,7 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",
 function dateToday(){return new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10)}
 function switchTab(tab){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));["stats","add","history"].forEach(t=>$(t+"View").classList.toggle("hidden",t!==tab));if(tab==="stats")renderStats();if(tab==="history")renderHistory();}
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
-function fillSelect(id,exclude=[]){const el=$(id),old=el.value;el.innerHTML=state.names.map((n,i)=>`<option value="${i}" ${exclude.includes(i)?"disabled":""}>${esc(n)}</option>`).join("");if(old!==""&&!exclude.includes(Number(old)))el.value=old;else el.selectedIndex=0;}
+function fillSelect(id,exclude=[]){const el=$(id),old=el.value;el.innerHTML=state.names.map((n,i)=>`<option value="${i}" ${exclude.includes(i)?"disabled":""}>${esc(n)}</option>`).join("");if(old!==""&&!exclude.includes(Number(old)))el.value=old;else el.selectedIndex=DEFAULT_SEL[id]||0;}
 function refreshSelects(){["s1","s2","a1","a2","b1","b2"].forEach(id=>fillSelect(id));updateLabels();}
 function updateLabels(){if($("s1")){$("s1label").textContent=state.names[+$("s1").value]||"Spieler 1";$("s2label").textContent=state.names[+$("s2").value]||"Spieler 2";$("alabel").textContent=(state.names[+$("a1").value]||"Team A")+" + "+(state.names[+$("a2").value]||"");$("blabel").textContent=(state.names[+$("b1").value]||"")+" + "+(state.names[+$("b2").value]||"Team B");}}
 ["s1","s2","a1","a2","b1","b2"].forEach(id=>$(id).addEventListener("change",()=>{if(id==="s1"&&$("s1").value===$("s2").value)$("s2").value=String((+$("s1").value+1)%4);if(id==="s2"&&$("s2").value===$("s1").value)$("s1").value=String((+$("s2").value+1)%4);const groups=[["a1","a2","b1","b2"]];if(groups[0].includes(id)){const used=new Set();for(const k of groups[0]){const el=$(k);if(used.has(el.value)){const next=[0,1,2,3].find(i=>!used.has(String(i)));if(next!==undefined)el.value=String(next);}used.add(el.value);}}updateLabels();}));
