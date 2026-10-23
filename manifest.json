@@ -1,0 +1,10 @@
+{
+  "name": "Kicker Crew",
+  "short_name": "Kicker Crew",
+  "description": "Tischkicker-Ergebnisse und Spielerstatistiken",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1713",
+  "theme_color": "#10251e",
+  "icons": []
+}

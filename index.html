@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10251e">
+<title>Kicker Crew</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--bg:#0b1713;--panel:#142820;--panel2:#1b352b;--text:#f2f7f3;--muted:#a8beb1;--accent:#b8f36b;--line:#2c4b3c;--red:#ff947c}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#10251e,#09120f 70%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+.app{max-width:760px;margin:auto;padding:18px 15px 42px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 20px}.brand{display:flex;align-items:center;gap:11px}.logo{width:45px;height:45px;border-radius:14px;background:var(--accent);color:#10251e;display:grid;place-items:center;font-size:25px;font-weight:900}.eyebrow{color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}.brand h1{font-size:23px;margin:0;letter-spacing:-.04em}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:12px}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;background:#0a1511;border:1px solid var(--line);border-radius:14px;padding:4px;gap:4px;margin-bottom:16px}.tab{border:0;border-radius:10px;padding:11px 5px;background:transparent;color:var(--muted);font-weight:700}.tab.active{background:var(--accent);color:#10251e}
+.panel{background:rgba(20,40,32,.94);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 10px 30px #0002}.panel h2{font-size:17px;margin:0 0 13px}.sub{color:var(--muted);font-size:13px;line-height:1.45}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px 10px}.stat strong{font-size:24px;display:block;letter-spacing:-.04em}.stat span{font-size:11px;color:var(--muted)}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}input,select{width:100%;background:#0b1913;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px;font:inherit;min-width:0}input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:12px}.mode{display:flex;gap:8px;margin-bottom:14px}.mode button{flex:1}.btn{border:0;border-radius:12px;padding:12px 14px;font-weight:800;background:var(--accent);color:#10251e;font-size:14px;cursor:pointer}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.btn.danger{background:#48271f;color:#ffd0c5;border:1px solid #754034}.btn:active{transform:scale(.99)}.full{width:100%}.scoregrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.scorebox{background:#0b1913;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}.scorebox .team{font-size:12px;color:var(--muted);min-height:30px}.scorebox input{font-size:28px;text-align:center;font-weight:900;padding:8px}.rowhead{display:flex;justify-content:space-between;align-items:center;gap:8px}.rankrow{display:grid;grid-template-columns:30px 1fr repeat(3,60px);gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.rankrow:last-child{border-bottom:0}.ranknum{font-weight:900;color:var(--accent)}.playername{font-weight:750}.playername small{display:block;color:var(--muted);font-size:11px;font-weight:400}.metric{text-align:right;font-variant-numeric:tabular-nums}.metric strong{display:block}.metric small{color:var(--muted);font-size:10px}.tablehead{display:grid;grid-template-columns:30px 1fr repeat(3,60px);gap:8px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.04em;padding:0 0 7px;border-bottom:1px solid var(--line)}.match{padding:12px 0;border-bottom:1px solid var(--line)}.match:last-child{border-bottom:0}.matchtop{display:flex;justify-content:space-between;gap:8px;align-items:center}.matchscore{font-size:18px;font-weight:900}.matchmeta{font-size:11px;color:var(--muted);margin-top:4px}.tag{font-size:10px;padding:4px 7px;border-radius:999px;background:#284538;color:#d9f8c5}.empty{text-align:center;padding:26px 10px;color:var(--muted);font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{flex:1}.hidden{display:none!important}.note{font-size:12px;color:var(--muted);margin-top:10px}.foot{text-align:center;color:#718b7b;font-size:11px;padding:8px}
+@media(max-width:420px){.app{padding:13px 11px 32px}.rankrow,.tablehead{grid-template-columns:22px 1fr repeat(3,49px);gap:5px}.metric strong{font-size:13px}.stat strong{font-size:21px}.panel{padding:13px}.brand h1{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="brand"><div class="logo">⚽</div><div><div class="eyebrow">Eure Match-Statistik</div><h1>Kicker Crew</h1></div></div><span class="pill">4 Spieler · lokal</span></header>
+  <nav class="tabs"><button class="tab active" data-tab="stats">Rangliste</button><button class="tab" data-tab="add">Spiel eintragen</button><button class="tab" data-tab="history">Verlauf</button></nav>
+  <section id="statsView">
+    <div class="stats">
+      <div class="stat"><strong id="totalGames">0</strong><span>Spiele gesamt</span></div>
+      <div class="stat"><strong id="singleGames">0</strong><span>Einzelspiele</span></div>
+      <div class="stat"><strong id="doubleGames">0</strong><span>Doppelspiele</span></div>
+    </div>
+    <div class="panel">
+      <div class="rowhead"><h2>Einzel · Spielerwertung</h2><span class="tag">1 gegen 1</span></div>
+      <p class="sub">Gewinne und Gewinnquote je Spieler in Einzelspielen.</p>
+      <div id="singlesBoard"></div>
+    </div>
+    <div class="panel">
+      <div class="rowhead"><h2>Doppel · Teamwertung</h2><span class="tag">2 gegen 2</span></div>
+      <p class="sub">Gewinne werden für beide Spieler des Siegerteams gezählt. Die Quote basiert auf den Doppelspielen, an denen der Spieler teilgenommen hat.</p>
+      <div id="doublesBoard"></div>
+    </div>
+    <div class="panel">
+      <h2>Spieler verwalten</h2>
+      <p class="sub">Tragt eure Namen ein. Die Statistik bleibt auf diesem Gerät gespeichert.</p>
+      <div class="grid2" id="playerFields"></div>
+      <button class="btn full" id="saveNames">Namen speichern</button>
+    </div>
+  </section>
+  <section id="addView" class="hidden">
+    <div class="panel">
+      <h2>Neues Spiel</h2>
+      <div class="mode"><button class="btn" id="singleMode">Einzel 1 vs 1</button><button class="btn secondary" id="doubleMode">Doppel 2 vs 2</button></div>
+      <div class="field"><label for="playedAt">Datum</label><input id="playedAt" type="date"></div>
+      <div id="singleForm">
+        <div class="grid2">
+          <div class="field"><label>Spieler 1</label><select id="s1"></select></div>
+          <div class="field"><label>Spieler 2</label><select id="s2"></select></div>
+        </div>
+        <div class="scoregrid">
+          <div class="scorebox"><div class="team" id="s1label">Spieler 1</div><input id="ss1" type="number" min="0" max="99" value="10" inputmode="numeric"></div>
+          <div class="scorebox"><div class="team" id="s2label">Spieler 2</div><input id="ss2" type="number" min="0" max="99" value="7" inputmode="numeric"></div>
+        </div>
+      </div>
+      <div id="doubleForm" class="hidden">
+        <div class="grid2">
+          <div class="field"><label>Team A · Spieler 1</label><select id="a1"></select></div>
+          <div class="field"><label>Team A · Spieler 2</label><select id="a2"></select></div>
+          <div class="field"><label>Team B · Spieler 1</label><select id="b1"></select></div>
+          <div class="field"><label>Team B · Spieler 2</label><select id="b2"></select></div>
+        </div>
+        <div class="scoregrid">
+          <div class="scorebox"><div class="team" id="alabel">Team A</div><input id="ascore" type="number" min="0" max="99" value="10" inputmode="numeric"></div>
+          <div class="scorebox"><div class="team" id="blabel">Team B</div><input id="bscore" type="number" min="0" max="99" value="8" inputmode="numeric"></div>
+        </div>
+      </div>
+      <div class="field"><label for="memo">Notiz (optional)</label><input id="memo" placeholder="z. B. Revanche, Turnier …" maxlength="80"></div>
+      <button class="btn full" id="saveGame">Ergebnis speichern</button>
+      <p class="note">Unentschieden werden als Spiel gezählt, aber nicht als Sieg. Ein Spieler kann nicht zweimal im selben Match stehen.</p>
+    </div>
+  </section>
+  <section id="historyView" class="hidden">
+    <div class="panel"><div class="rowhead"><h2>Letzte Spiele</h2><button class="btn secondary" id="exportBtn">Export JSON</button></div><div id="historyList"></div></div>
+    <div class="panel"><h2>Daten sichern</h2><p class="sub">Die Daten werden im Browser auf diesem Gerät gespeichert. Exportiere sie gelegentlich als Backup.</p><div class="actions"><button class="btn secondary" id="importBtn">Import JSON</button><button class="btn danger" id="clearBtn">Alle Spiele löschen</button></div><input class="hidden" id="importFile" type="file" accept="application/json"></div>
+  </section>
+  <div class="foot">Kicker Crew · Deine Spiele, deine Statistik</div>
+</div>
+<script>
+const DEFAULT_NAMES=["Spieler 1","Spieler 2","Spieler 3","Spieler 4"];
+const STORE="kicker-crew-v1";
+let state={names:[...DEFAULT_NAMES],games:[]}, mode="single";
+const $=id=>document.getElementById(id);
+function load(){try{const raw=localStorage.getItem(STORE);if(raw){const x=JSON.parse(raw);if(Array.isArray(x.names)&&x.names.length===4&&Array.isArray(x.games))state=x;}}catch(e){}}
+function persist(){localStorage.setItem(STORE,JSON.stringify(state));}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function dateToday(){return new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function switchTab(tab){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));["stats","add","history"].forEach(t=>$(t+"View").classList.toggle("hidden",t!==tab));if(tab==="stats")renderStats();if(tab==="history")renderHistory();}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+function fillSelect(id,exclude=[]){const el=$(id),old=el.value;el.innerHTML=state.names.map((n,i)=>`<option value="${i}" ${exclude.includes(i)?"disabled":""}>${esc(n)}</option>`).join("");if(old!==""&&!exclude.includes(Number(old)))el.value=old;else el.selectedIndex=0;}
+function refreshSelects(){["s1","s2","a1","a2","b1","b2"].forEach(fillSelect);updateLabels();}
+function updateLabels(){if($("s1")){$("s1label").textContent=state.names[+$("s1").value]||"Spieler 1";$("s2label").textContent=state.names[+$("s2").value]||"Spieler 2";$("alabel").textContent=(state.names[+$("a1").value]||"Team A")+" + "+(state.names[+$("a2").value]||"");$("blabel").textContent=(state.names[+$("b1").value]||"")+" + "+(state.names[+$("b2").value]||"Team B");}}
+["s1","s2","a1","a2","b1","b2"].forEach(id=>$(id).addEventListener("change",()=>{if(id==="s1"&&$("s1").value===$("s2").value)$("s2").value=String((+$("s1").value+1)%4);if(id==="s2"&&$("s2").value===$("s1").value)$("s1").value=String((+$("s2").value+1)%4);const groups=[["a1","a2","b1","b2"]];if(groups[0].includes(id)){const used=new Set();for(const k of groups[0]){const el=$(k);if(used.has(el.value)){const next=[0,1,2,3].find(i=>!used.has(String(i)));if(next!==undefined)el.value=String(next);}used.add(el.value);}}updateLabels();}));
+function setMode(m){mode=m;$("singleForm").classList.toggle("hidden",m!=="single");$("doubleForm").classList.toggle("hidden",m!=="double");$("singleMode").className=m==="single"?"btn":"btn secondary";$("doubleMode").className=m==="double"?"btn":"btn secondary";}
+$("singleMode").onclick=()=>setMode("single");$("doubleMode").onclick=()=>setMode("double");
+function winStats(type){const arr=state.names.map((name,i)=>({i,name,played:0,wins:0,draws:0,losses:0}));for(const g of state.games.filter(g=>g.type===type)){let left,right;if(type==="single"){left=[g.players[0]];right=[g.players[1]];}else{left=g.teams[0];right=g.teams[1];}const result=g.score[0]===g.score[1]?"draw":g.score[0]>g.score[1]?"left":"right";for(const i of left){arr[i].played++;if(result==="left")arr[i].wins++;else if(result==="right")arr[i].losses++;else arr[i].draws++;}for(const i of right){arr[i].played++;if(result==="right")arr[i].wins++;else if(result==="left")arr[i].losses++;else arr[i].draws++;}}return arr.sort((a,b)=>b.wins-a.wins||(b.played?b.wins/b.played:0)-(a.played?a.wins/a.played:0)||a.name.localeCompare(b.name));}
+function boardHTML(arr){return `<div class="tablehead"><span>#</span><span>Spieler</span><span style="text-align:right">Sp.</span><span style="text-align:right">Siege</span><span style="text-align:right">Quote</span></div>`+arr.map((p,n)=>`<div class="rankrow"><span class="ranknum">${n+1}</span><span class="playername">${esc(p.name)}<small>${p.draws} U · ${p.losses} N</small></span><span class="metric"><strong>${p.played}</strong></span><span class="metric"><strong>${p.wins}</strong></span><span class="metric"><strong>${p.played?Math.round(p.wins/p.played*100):0}%</strong></span></div>`).join("");}
+function renderStats(){$("totalGames").textContent=state.games.length;$("singleGames").textContent=state.games.filter(g=>g.type==="single").length;$("doubleGames").textContent=state.games.filter(g=>g.type==="double").length;const s=winStats("single"),d=winStats("double");$("singlesBoard").innerHTML=state.games.some(g=>g.type==="single")?boardHTML(s):'<div class="empty">Noch keine Einzelspiele eingetragen.</div>';$("doublesBoard").innerHTML=state.games.some(g=>g.type==="double")?boardHTML(d):'<div class="empty">Noch keine Doppelspiele eingetragen.</div>';renderNameFields();}
+function renderNameFields(){$("playerFields").innerHTML=state.names.map((n,i)=>`<div class="field"><label>Spieler ${i+1}</label><input data-player="${i}" value="${esc(n)}" maxlength="28"></div>`).join("");}
+$("saveNames").onclick=()=>{const inputs=[...document.querySelectorAll("[data-player]")];const names=inputs.map(x=>x.value.trim()||DEFAULT_NAMES[+x.dataset.player]);if(new Set(names.map(n=>n.toLocaleLowerCase())).size<4){alert("Bitte verwendet vier unterschiedliche Namen.");return;}state.names=names;persist();refreshSelects();renderStats();renderHistory();alert("Namen gespeichert.");};
+function renderHistory(){const games=[...state.games].sort((a,b)=>(b.date||"").localeCompare(a.date||"")||b.created-a.created);$("historyList").innerHTML=games.length?games.map(g=>{const left=g.type==="single"?g.players:[...g.teams[0]],right=g.type==="single"?[g.players[1]]:[...g.teams[1]];const names=a=>a.map(i=>esc(state.names[i])).join(" + ");return `<div class="match"><div class="matchtop"><span class="tag">${g.type==="single"?"Einzel":"Doppel"}</span><span class="matchscore">${g.score[0]} : ${g.score[1]}</span><button class="btn danger" style="padding:7px 10px;font-size:11px" data-delete="${g.id}">Löschen</button></div><div>${names(left)} <span class="sub">vs.</span> ${names(right)}</div><div class="matchmeta">${esc(g.date||"Ohne Datum")}${g.memo?" · "+esc(g.memo):""}</div></div>`}).join(""):'<div class="empty">Noch keine Spiele gespeichert. Trag dein erstes Match ein!</div>';document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>{if(confirm("Dieses Spiel wirklich löschen?")){state.games=state.games.filter(g=>g.id!==b.dataset.delete);persist();renderHistory();renderStats();}});}
+function getNum(id){const v=Number($(id).value);return Number.isInteger(v)&&v>=0&&v<=99?v:null;}
+$("saveGame").onclick=()=>{let g;if(mode==="single"){const p=[+$("s1").value,+$("s2").value],sc=[getNum("ss1"),getNum("ss2")];if(p[0]===p[1])return alert("Wähle zwei unterschiedliche Spieler.");if(sc.includes(null))return alert("Bitte gültige Tore zwischen 0 und 99 eingeben.");g={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),type:"single",players:p,score:sc,date:$("playedAt").value,memo:$("memo").value.trim(),created:Date.now()};}else{const teams=[[$("a1").value,$("a2").value].map(Number),[$("b1").value,$("b2").value].map(Number)],sc=[getNum("ascore"),getNum("bscore")];if(new Set(teams.flat()).size!==4)return alert("Im Doppel müssen alle vier Spieler unterschiedlich sein.");if(sc.includes(null))return alert("Bitte gültige Tore zwischen 0 und 99 eingeben.");g={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),type:"double",teams,score:sc,date:$("playedAt").value,memo:$("memo").value.trim(),created:Date.now()};}state.games.push(g);persist();$("memo").value="";renderStats();renderHistory();switchTab("stats");alert("Spiel gespeichert!");};
+$("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="kicker-crew-backup.json";a.click();URL.revokeObjectURL(url);};
+$("importBtn").onclick=()=>$("importFile").click();
+$("importFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!Array.isArray(x.names)||x.names.length!==4||!Array.isArray(x.games))throw Error();if(confirm("Import ersetzt die aktuellen Daten. Fortfahren?")){state=x;persist();refreshSelects();renderStats();renderHistory();alert("Import erfolgreich.");}}catch(err){alert("Datei ungültig oder nicht kompatibel.");}e.target.value="";};
+$("clearBtn").onclick=()=>{if(confirm("Wirklich alle gespeicherten Spiele löschen? Namen bleiben erhalten.")){state.games=[];persist();renderStats();renderHistory();}};
+load();$("playedAt").value=dateToday();refreshSelects();renderStats();renderHistory();setMode("single");
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body></html>
